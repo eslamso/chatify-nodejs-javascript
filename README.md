@@ -7,7 +7,6 @@ A feature-rich, real-time chat application built using Node.js, Express.js, and 
 - **User Authentication:** Secure sign-up and login using JWT for token-based authentication.
 - **Real-Time Messaging:** Instant messaging enabled by Socket.io.
 - **User Management:** CRUD operations for managing user profiles.
-- **Private and Group Chats:** Supports one-on-one and group conversations.
 - **Typing Indicators:** Displays when users are typing.
 - **Message History:** Stores and retrieves past messages securely.
 
