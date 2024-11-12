@@ -33,6 +33,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    lastAppearance: Date,
+    isOnline: {
+      type: Boolean,
+    },
     // for email activation
     activationCode: String,
     activationCodeExpires: Date,

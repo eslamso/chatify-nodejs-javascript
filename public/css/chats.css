@@ -1,0 +1,97 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.sidebar {
+  width: 30%;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 15px;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.sidebar-header h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.sidebar-header input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.chat-list {
+  list-style: none;
+  padding: 10px;
+}
+
+.chat-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  overflow: hidden;
+}
+
+.chat-item:hover {
+  background-color: #f1f1f1;
+}
+
+.chat-avatar img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.chat-info {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.chat-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: black;
+}
+
+.chat-namee {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: black;
+}
+
+.chat-last-message {
+  color: black;
+  font-size: 14px;
+}
+
+.chat-time {
+  position: absolute;
+  right: 0px;
+  top: 12px;
+  font-size: 12px;
+  color: black;
+}
+.last-seen {
+  font-size: 13px;
+  font-weight: lighter;
+}

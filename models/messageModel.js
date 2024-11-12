@@ -30,18 +30,6 @@ const messageSchema = new mongoose.Schema(
 //   this.sentAt = Date.now();
 //   next();
 // });
-messageSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: "sender",
-    select: "firstName lastName email photo ",
-  });
-  this.populate({
-    path: "receiver",
-    select: "firstName lastName email photo ",
-  });
-
-  next();
-});
 
 const Message = mongoose.model("Message", messageSchema);
 

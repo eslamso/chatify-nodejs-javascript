@@ -6,7 +6,6 @@ const chatSchema = new mongoose.Schema(
     roomExternalId: {
       type: String,
       require: true,
-      unique: true,
     },
     user1: {
       type: mongoose.Schema.Types.ObjectId,
@@ -20,42 +19,8 @@ const chatSchema = new mongoose.Schema(
     },
 
     messages: [messsageModel.schema],
+    lastSentMessage: { type: messsageModel.schema, default: null },
 
-    lastSendMessageTime: Date,
-    lastSeenMessage1: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Message",
-      default: null,
-    },
-    lastDeliveredMessage1: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Message",
-      default: null,
-    },
-    lastSentMessage1: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Message",
-      default: null,
-    },
-    lastSeenMessage2: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Message",
-      default: null,
-    },
-    lastDeliveredMessage2: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Message",
-      default: null,
-    },
-    lastSentMessage2: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Message",
-      default: null,
-    },
-    blocked: {
-      type: Boolean,
-      default: false,
-    },
     createdAt: {
       type: Date,
       default: Date.now,
@@ -64,33 +29,23 @@ const chatSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+chatSchema.pre("save", function (next) {
+  if (this.messages.length > 0) {
+    this.lastSentMessage = this.messages[this.messages.length - 1];
+  }
+  next();
+});
+
 chatSchema.pre(/^find/, function (next) {
   this.populate({
     path: "user1",
-    select: "firstName lastName email photo",
+    select: "firstName lastName email photo lastAppearance",
   });
   this.populate({
     path: "user2",
-    select: "firstName lastName email photo",
+    select: "firstName lastName email photo lastAppearance",
   });
-  this.populate({
-    path: "lastSeenMessage1",
-  });
-  this.populate({
-    path: "lastSeenMessage2",
-  });
-  this.populate({
-    path: "lastDeliveredMessage1",
-  });
-  this.populate({
-    path: "lastDeliveredMessage2",
-  });
-  this.populate({
-    path: "lastSentMessage1",
-  });
-  this.populate({
-    path: "lastSentMessage2",
-  });
+  this.populate("lastSentMessage");
   next();
 });
 const Chat = mongoose.model("Chat", chatSchema);

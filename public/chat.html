@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+      integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="css/chats.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>chatify</title>
+  </head>
+  <body>
+    <div class="chat-container">
+      <header class="chat-header">
+        <h1>Chats</h1>
+        <div class="chat-name">
+          <p class="c-name">chat Name</p>
+          <p class="last-seen"></p>
+        </div>
+        <button id="logout" class="btn" style="width: fit-content">
+          logout
+        </button>
+      </header>
+      <main class="chat-main">
+        <div class="chat-sidebar">
+          <div class="sidebar-header">
+            <input type="text" id="searchInput" placeholder="Search chats..." />
+          </div>
+          <ul class="chat-list" id="chatList">
+            <!-- Chat Items (repeated structure) -->
+          </ul>
+        </div>
+        <div class="chat-messages"></div>
+        <div class="chat-form-container">
+          <form id="chat-form">
+            <input
+              id="msg"
+              type="text"
+              placeholder="Enter Message"
+              required
+              autocomplete="off"
+            />
+            <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
+          </form>
+        </div>
+      </main>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.13.0/qs.min.js"
+      integrity="sha512-LGi3LadLxI4NfDCsvTQ+Ps8dmV3PK7QUNFMEPyqpfFI78fu9YUXPRRVHIOH9xS5OLz035SSTH2Mc2Tzau+l7BA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      document.querySelector("#logout").addEventListener("click", function () {
+        localStorage.clear();
+        //localStorage.removeItem("Token");
+        axios
+          .post("http://localhost:3000/api/v1/auth/logout")
+          .then(function (response) {
+            console.log(response);
+            window.location.href = "./index.html";
+          })
+
+          .catch(function (error) {
+            alert(error.response.data.message);
+            console.log(error.response.data.message);
+          });
+      });
+    </script>
+  </body>
+</html>
